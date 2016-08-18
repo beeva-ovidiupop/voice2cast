@@ -63,8 +63,11 @@ HelloWorld.prototype.eventHandlers.onSessionEnded = function (sessionEndedReques
 
 HelloWorld.prototype.intentHandlers = {
     // register custom intent handlers
-    "HelloWorldIntent": function (intent, session, response) {
-        response.tellWithCard("Hello World!", "Greeter", "Hello World!");
+    "screenIntent": function (intent, session, response) {
+        response.tell("u have two screens available online!");
+    },
+    "sendContentIntent": function (intent, session, response) {
+        response.tell("get your shit togeter");
     },
     "AMAZON.HelpIntent": function (intent, session, response) {
         response.ask("You can say hello to me!", "You can say hello to me!");

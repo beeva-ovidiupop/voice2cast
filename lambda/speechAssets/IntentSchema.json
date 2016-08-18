@@ -1,7 +1,10 @@
 {
   "intents": [
     {
-      "intent": "HelloWorldIntent"
+      "intent": "screenIntent"
+    },
+    {
+      "intent": "sendContentIntent"
     },
     {
       "intent": "AMAZON.HelpIntent"
