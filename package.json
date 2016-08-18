@@ -1,0 +1,27 @@
+{
+  "name": "voice2cast",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beeva-labs/voice2cast.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/beeva-labs/voice2cast/issues"
+  },
+  "homepage": "https://github.com/beeva-labs/voice2cast#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "castv2-client": "^1.1.2",
+    "castv2-youtube": "0.0.2",
+    "express": "^4.14.0",
+    "lodash": "^4.15.0",
+    "mdns": "^2.3.3"
+  }
+}
