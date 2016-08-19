@@ -18,12 +18,12 @@ exports.findDevices = function(callback){
   browser.start();
 
   // 100 milisegundos de búsqueda
-  setTimeout(function(){
+  setTimeout(function() {
     browser.stop();
     // Hack?!
     browser = mdns.createBrowser(mdns.tcp('googlecast'));
-    callback(devices);
-  }, 100);
+    callback(_.uniq(devices));
+  }, 150);
 }
 
 exports.setContent = function setContent(content){
@@ -44,26 +44,32 @@ exports.setContent = function setContent(content){
 }
 
 function launchPlayer(client, content){
-  // Control de player
-  launchDefaultMediaPlayer(client);
+  console.log(content);
+  if(content.type === 'image' || content.type === 'video')
+    launchDefaultMediaPlayer(client, content);
+  else if(content.content && content.content.includes('youtube'))
+    launchYoutube(client, content);
+  else if(content.type === 'web')
+    launchDefaultMediaPlayer(client, {'content': 'http://karnanicorp.com/Images/COMING-SOON.jpg'});
+  else launchDefaultMediaPlayer(client, {'content': 'https://i.ytimg.com/vi/StxYCZfuFMc/maxresdefault.jpg'});
+
 }
 
-function launchYoutube(client){
+function launchYoutube(client, content){
   client.launch(Youtube, function(err, player) {
-    player.load('vk_965FrnF0');
+    player.load(content.content);
     player.on('status', function(status) {
       console.log('status youtube', status);
     });
   });
 }
 
-function launchDefaultMediaPlayer(client){
+function launchDefaultMediaPlayer(client, content){
   client.launch(DefaultMediaReceiver, function(err, player){
     var media = {
       // Here you can plug an URL to any mp4, webm, mp3 or jpg file with the proper contentType.
-      contentId: 'https://d0.awsstatic.com/events/aws-hosted-events/2015/Spain/logo%20beeva%20vertical%20RGB.jpg'
+      contentId: content.content
     };
-
     player.on('status', function(status) {
       console.log('status broadcast playerState=%s', status.playerState);
     });
@@ -71,6 +77,5 @@ function launchDefaultMediaPlayer(client){
     player.load(media, { autoplay: true }, function(err, status) {
       console.log('media loaded playerState=%s', err, status);
     });
-
   });
 }
