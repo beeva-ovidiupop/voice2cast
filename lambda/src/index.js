@@ -67,9 +67,9 @@ HelloWorld.prototype.intentHandlers = {
     // register custom intent handlers
     "screenIntent": function (intent, session, response) {
         console.log(intent)
-        request.get('http://8f078172.ngrok.io/screens', function(error, response, body) {
+        request.get('http://29e16bf3.ngrok.io/screens', function(error, resp, body) {
             var screens = JSON.parse(body);
-            if(response.length < 1) response.tell("you don't tvs, you poor motherfucker");
+            if(screns.length < 1) response.tell("you don't tvs, you poor motherfucker");
             screens = screens.map(function(item){ return item.name });
             response.tell('You have ', screens.length, ' tv\'s.', screens.join(','))
       })
@@ -80,7 +80,7 @@ HelloWorld.prototype.intentHandlers = {
         search.search(function(err, content){ 
             if(err) content = {'type': 'image', 'content': 'http://i.imgur.com/Ql6Dvqa.jpg' };
             request.post({ 
-                url:'http://8f078172.ngrok.io/content', 
+                url:'http://29e16bf3.ngrok.io/content', 
                 json: content
             }, 
             function(error, response, body){
