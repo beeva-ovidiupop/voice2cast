@@ -71,20 +71,20 @@ HelloWorld.prototype.intentHandlers = {
             var screens = JSON.parse(body);
             if(screens.length < 1) response.tell("you don't tvs, you poor motherfucker");
             screens = screens.map(function(item){ return item.name });
-            var message = 'You have ' + screens.length + ' tv\'s.' + screens.join(',');
+            var message = 'You have ' + screens.length + ' tvs.' + screens.join(',');
             response.tell(message);
       })
     },
     "sendContentIntent": function (intent, session, response) {
         if(intent.slots.Search) var query = intent.slots.Search.value;
         if(intent.slots.Source) var querySource = intent.slots.Source.value;
-        search.search(function(err, content){ 
+        search.search(query, querySource, function(err, content){ 
             if(err) content = {'type': 'image', 'content': 'http://i.imgur.com/Ql6Dvqa.jpg' };
             request.post({ 
                 url:'http://29e16bf3.ngrok.io/content', 
                 json: content
             }, 
-            function(error, response, body){
+            function(error, resp, body){
                 response.tell('I will try... maybe');
             });  
         }); 
