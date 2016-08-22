@@ -27,6 +27,8 @@ var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-valu
  * The AlexaSkill prototype and helper functions
  */
 var AlexaSkill = require('./AlexaSkill');
+var request = require('request');
+var search = require('./search');
 
 /**
  * HelloWorld is a child of AlexaSkill.
@@ -64,10 +66,30 @@ HelloWorld.prototype.eventHandlers.onSessionEnded = function (sessionEndedReques
 HelloWorld.prototype.intentHandlers = {
     // register custom intent handlers
     "screenIntent": function (intent, session, response) {
-        response.tell("u have two screens available online!");
+        console.log(intent)
+        request.get('http://8f078172.ngrok.io/screens', function(error, response, body) {
+            var response = JSON.parse(body);
+            if(response.length < 1) response.tell("you don't tvs, you poor motherfucker");
+            var screens = 
+            var result = JSON.parse(body);
+            _.each(result, function(num){ 
+                response.tell( num.name + "display are available");
+         })
+      })
     },
     "sendContentIntent": function (intent, session, response) {
-        response.tell("get your shit togeter");
+        if(intent.slots.Search) var query = intent.slots.Search.value;
+        if(intent.slots.Source) var querySource = intent.slots.Source.value;
+        search.search(function(err, content){ 
+            if(err) content = {'type': 'image', 'content': 'http://i.imgur.com/Ql6Dvqa.jpg' };
+            request.post({ 
+                url:'http://8f078172.ngrok.io/content', 
+                json: content
+            }, 
+            function(error, response, body){
+                response.tell('I will try... maybe');
+            });  
+        }); 
     },
     "AMAZON.HelpIntent": function (intent, session, response) {
         response.ask("You can say hello to me!", "You can say hello to me!");
