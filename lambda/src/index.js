@@ -78,16 +78,18 @@ HelloWorld.prototype.intentHandlers = {
     "sendContentIntent": function (intent, session, response) {
         if(intent.slots.Search) var query = intent.slots.Search.value;
         if(intent.slots.Source) var querySource = intent.slots.Source.value;
-        search.search(function(err, content){ 
+        console.log(query, querySource);
+        search.search(query, querySource, function(err, content){
+            console.log('search', err, content);
             if(err) content = {'type': 'image', 'content': 'http://i.imgur.com/Ql6Dvqa.jpg' };
-            request.post({ 
-                url:'http://29e16bf3.ngrok.io/content', 
+            request.post({
+                url:'http://29e16bf3.ngrok.io/content',
                 json: content
-            }, 
-            function(error, response, body){
+            },
+            function(error, rsp, body){
                 response.tell('I will try... maybe');
-            });  
-        }); 
+            });
+        });
     },
     "AMAZON.HelpIntent": function (intent, session, response) {
         response.ask("You can say hello to me!", "You can say hello to me!");
@@ -100,4 +102,3 @@ exports.handler = function (event, context) {
     var helloWorld = new HelloWorld();
     helloWorld.execute(event, context);
 };
-
