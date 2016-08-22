@@ -71,7 +71,8 @@ HelloWorld.prototype.intentHandlers = {
             var screens = JSON.parse(body);
             if(screens.length < 1) response.tell("you don't tvs, you poor motherfucker");
             screens = screens.map(function(item){ return item.name });
-            response.tell('You have ', screens.length, ' tv\'s.', screens.join(','))
+            var message = 'You have ' + screens.length + ' tv\'s.' + screens.join(',');
+            response.tell(message);
       })
     },
     "sendContentIntent": function (intent, session, response) {
