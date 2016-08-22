@@ -69,7 +69,7 @@ HelloWorld.prototype.intentHandlers = {
         console.log(intent)
         request.get('http://29e16bf3.ngrok.io/screens', function(error, resp, body) {
             var screens = JSON.parse(body);
-            if(screns.length < 1) response.tell("you don't tvs, you poor motherfucker");
+            if(screens.length < 1) response.tell("you don't tvs, you poor motherfucker");
             screens = screens.map(function(item){ return item.name });
             response.tell('You have ', screens.length, ' tv\'s.', screens.join(','))
       })
