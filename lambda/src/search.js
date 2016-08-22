@@ -6,14 +6,14 @@ var Scraper = require ('images-scraper')
  , bing = new Scraper.Bing();
 google.resultsPerPage = 1;
 
-export.search = function(query, querySource, callback){
+exports.search = function(query, querySource, callback){
 	if(querySource === 'web' || querySource == 'google')
 		searchWeb(query, callback);
 	else if(_.indexOf(['image', 'images', 'picture', 'pictures', 'flickr'], querySource) >= 0){
 		searchImage(query, callback);
 	}
 	else if( querySource == 'youtube' ) searchVideo(query, callback)
-	else callback(undefined, {'type': 'image', 'content': 'http://i.imgur.com/Ql6Dvqa.jpg' })	
+	else callback(undefined, {'type': 'image', 'content': 'http://i.imgur.com/Ql6Dvqa.jpg' })
 };
 
 function searchWeb(query, callback){
@@ -31,7 +31,7 @@ function searchImage(name,callback){
 	    keyword: 'name',
 	    num: 3
 	}).then(function (res) {
-		var returnData = {'type': 'image', 'content': res[0].url} 
+		var returnData = {'type': 'image', 'content': res[0].url}
 	    callback(undefined, res)
 	}).catch(function(err) {
 	    console.error(err)
