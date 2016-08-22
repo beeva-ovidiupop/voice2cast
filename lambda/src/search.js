@@ -1,4 +1,5 @@
 'use strict';
+
 var _ = require('underscore');
 var google = require('google');
 var youtube = require('youtube-search');
@@ -13,8 +14,10 @@ exports.search = function(query, querySource, callback){
 	else if(_.indexOf(['image', 'images', 'picture', 'pictures', 'flickr'], querySource) >= 0){
 		searchImage(query, callback);
 	}
-	else if( querySource == 'youtube' ) searchVideo(query, callback)
-	else callback(undefined, {'type': 'image', 'content': 'http://i.imgur.com/Ql6Dvqa.jpg' })
+	else if( querySource == 'youtube' ) searchVideo(query, callback);
+	else {
+		callback(undefined, {'type': 'image', 'content': 'http://i.imgur.com/Ql6Dvqa.jpg' });
+	}
 };
 
 function searchWeb(query, callback){

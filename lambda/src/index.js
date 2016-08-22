@@ -71,7 +71,7 @@ HelloWorld.prototype.intentHandlers = {
             var screens = JSON.parse(body);
             if(screens.length < 1) response.tell("you don't tvs, you poor motherfucker");
             screens = screens.map(function(item){ return item.name });
-            var message = 'You have ' + screens.length + ' tv\'s.' + screens.join(',');
+            var message = 'You have ' + screens.length + ' tvs.' + screens.join(',');
             response.tell(message);
       })
     },
@@ -86,7 +86,7 @@ HelloWorld.prototype.intentHandlers = {
                 url:'http://29e16bf3.ngrok.io/content',
                 json: content
             },
-            function(error, rsp, body){
+            function(error, resp, body){
                 response.tell('I will try... maybe');
             });
         });
