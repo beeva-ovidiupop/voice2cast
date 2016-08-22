@@ -1,7 +1,6 @@
 {
   "name": "voice2cast",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -26,5 +25,7 @@
     "google": "^2.1.0",
     "lodash": "^4.15.0",
     "mdns": "^2.3.3"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }
