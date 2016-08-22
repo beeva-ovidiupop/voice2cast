@@ -3,15 +3,11 @@ var _ = require('underscore');
 
 var google = require('google');
 
-var search = require('youtube-search');
- 
-var opts = {
-  maxResults: 10,
-  key: 'AIzaSyBsp2PzLbU-3tJTUxGHfna9f8Xu608gGt0'
-};
- 
-search('macarena', opts, function(err, results) {
-  if(err) return console.log(err);
- 
-  console.dir(results);
-});
+if(false)
+	console.log('false');
+else if(_.indexOf(['image', 'images', 'picture', 'pictures'], ['image']))
+	console.log('Science bitch!');
+else
+	console.log('no Science no bitches');
+
+console.log(_.find(['image', 'images', 'picture', 'pictures'], 'image'));

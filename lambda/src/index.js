@@ -68,13 +68,10 @@ HelloWorld.prototype.intentHandlers = {
     "screenIntent": function (intent, session, response) {
         console.log(intent)
         request.get('http://8f078172.ngrok.io/screens', function(error, response, body) {
-            var response = JSON.parse(body);
+            var screens = JSON.parse(body);
             if(response.length < 1) response.tell("you don't tvs, you poor motherfucker");
-            var screens = 
-            var result = JSON.parse(body);
-            _.each(result, function(num){ 
-                response.tell( num.name + "display are available");
-         })
+            screens = screens.map(function(item){ return item.name });
+            response.tell('You have ', screens.length, ' tv\'s.', screens.join(','))
       })
     },
     "sendContentIntent": function (intent, session, response) {

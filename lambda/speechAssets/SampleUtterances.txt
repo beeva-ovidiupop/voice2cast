@@ -1,5 +1,9 @@
-sendContentIntent show me a picture of
-sendContentIntent show me the web of 
+sendContentIntent show me a {Source} of {puppies|Search}  
+sendContentIntent show me a {Source} from {puppies|Search}  
+sendContentIntent search a {Source} with {puppies|Search} 
+sendContentIntent search {Source} for {puppies|Search}  
+sendContentIntent search and show me {Source} of {puppies|Search}  
+sendContentIntent display the {Source} of {puppies|Search}   
 screenIntent what screens are available
 screenIntent screens available
 screenIntent tell me available tvs
