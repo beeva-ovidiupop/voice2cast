@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "google": "^2.1.0",
-    "images-scraper": "^2.0.10",
     "request": "^2.74.0",
     "underscore": "^1.8.3",
     "youtube-search": "^1.0.6"

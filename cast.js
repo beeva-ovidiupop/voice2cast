@@ -62,7 +62,7 @@ function launchWeb(client, content){
 }
 
 function launchYoutube(client, content){
-  content.content = 'https://www.youtube.com/embed/' + youtube_parser(content.content) + '?autoplay=1&controls=0&modestbranding=1&iv_load_policy=3';
+  content.content = 'https://www.youtube.com/embed/' + youtube_parser(content.content) + '?autoplay=1&controls=0&modestbranding=1&iv_load_policy=3&loop=1';
   client.launch(Web, function(err, manager) {
     manager.load(content.content);
   });

@@ -3,8 +3,8 @@
 var _ = require('underscore');
 var google = require('google');
 var youtube = require('youtube-search');
-var Scraper = require ('images-scraper')
- , bing = new Scraper.Bing();
+//var Scraper = require ('images-scraper')
+// , bing = new Scraper.Bing();
 
 google.resultsPerPage = 1;
 
@@ -13,7 +13,8 @@ exports.search = function(query, querySource, callback) {
 	if(querySource === 'web' || querySource == 'google')
 		searchWeb(query, callback);
 	else if(_.indexOf(['image', 'images', 'picture', 'pictures', 'flickr'], querySource) >= 0){
-		searchImage(query, callback);
+    callback(undefined, {'type': 'image', 'content': 'http://i.imgur.com/PfO9ZNv.gif' });
+		//searchImage(query, callback);
 	}
 	else if( querySource == 'youtube' ) searchVideo(query, callback);
 	else {
@@ -34,7 +35,7 @@ function searchWeb(query, callback){
 	});
 }
 
-function searchImage(name,callback) {
+/*function searchImage(name,callback) {
   console.log('Search image', name);
 	bing.list({
 	    keyword: 'name',
@@ -42,18 +43,19 @@ function searchImage(name,callback) {
 	}).then(function (res) {
     console.log('Search image', res);
 		var returnData = {'type': 'image', 'content': res[0].url}
-	    callback(undefined, res)
+    callback(undefined, returnData)
 	}).catch(function(err) {
 	    console.error(err)
 	    callback(err)
 	})
-}
+}*/
 
 function searchVideo(term, callback){
   console.log('Search youtube', term);
 	var opts = {
 	  maxResults: 10,
-	  key: 'AIzaSyBsp2PzLbU-3tJTUxGHfna9f8Xu608gGt0'
+	  key: 'AIzaSyBsp2PzLbU-3tJTUxGHfna9f8Xu608gGt0',
+    type: 'video'
 	};
 	youtube(term, opts, function(err, results) {
     console.log('Search Youtube', err, results);
