@@ -10,7 +10,7 @@ google.resultsPerPage = 1;
 
 exports.search = function(query, querySource, callback) {
   querySource = querySource.toLowerCase();
-	if(querySource === 'web' || querySource == 'google')
+	if(querySource === 'internet' || querySource === 'web' || querySource == 'google')
 		searchWeb(query, callback);
 	else if(_.indexOf(['image', 'images', 'picture', 'pictures', 'flickr'], querySource) >= 0){
     callback(undefined, {'type': 'image', 'content': 'http://i.imgur.com/PfO9ZNv.gif' });
@@ -20,6 +20,10 @@ exports.search = function(query, querySource, callback) {
 	else {
 		callback(undefined, {'type': 'image', 'content': 'http://i.imgur.com/Ql6Dvqa.jpg' });
 	}
+};
+
+exports.youtube = function(query, callback) {
+  searchVideo(query, callback);
 };
 
 function searchWeb(query, callback){

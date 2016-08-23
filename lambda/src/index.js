@@ -30,6 +30,15 @@ var AlexaSkill = require('./AlexaSkill');
 var request = require('request');
 var search = require('./search');
 
+var okayMessages = [
+  "I will do my best",
+  "I may try it",
+  "Hey, you ask to much!",
+  "I may show you something",
+  "Okay Mr Policeman",
+  "Leave me alone"
+];
+
 /**
  * HelloWorld is a child of AlexaSkill.
  * To read more about inheritance in JavaScript, see the link below.
@@ -87,14 +96,34 @@ HelloWorld.prototype.intentHandlers = {
                 json: content
             },
             function(error, resp, body){
-                response.tell('I will try... maybe');
+              response.tell(choose(okayMessages));
             });
         });
     },
+    "playIntent": function (intent, session, response) {
+      if(intent.slots.Search) var query = intent.slots.Search.value;
+      search.youtube(query, function(err, content){
+          console.log('search', err, content);
+          if(err) content = {'type': 'image', 'content': 'http://i.imgur.com/Ql6Dvqa.jpg' };
+          request.post({
+              url:'http://29e16bf3.ngrok.io/content',
+              json: content
+          },
+          function(error, resp, body){
+            var messages = [];
+              response.tell(choose(okayMessages));
+          });
+      });
+      },
     "AMAZON.HelpIntent": function (intent, session, response) {
         response.ask("You can say hello to me!", "You can say hello to me!");
     }
 };
+
+function choose(choices) {
+  var index = Math.floor(Math.random() * choices.length);
+  return choices[index];
+}
 
 // Create the handler that responds to the Alexa Request.
 exports.handler = function (event, context) {
