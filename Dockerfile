@@ -1,8 +1,6 @@
 FROM resin/raspberrypi3-node:onbuild
-WORKDIR /usr/src/app
-COPY package.json package.json
-RUN sudo apt-get update && sudo apt-get install libavahi-compat-libdnssd-dev
-RUN JOBS=MAX npm install --production --unsafe-perm && npm cache clean && rm -rf /tmp/*
-COPY . ./
-ENV INITSYSTEM on
-CMD ["npm", "start"]
+
+RUN sudo apt-get update
+RUN sudo apt-get install -y libavahi-compat-libdnssd-dev
+RUN sudo npm install -g n
+RUN sudo npm install -g pm2
