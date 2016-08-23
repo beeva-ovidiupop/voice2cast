@@ -48,7 +48,7 @@ function launchPlayer(client, content){
   console.log(content);
   if(content.type === 'image' || content.type === 'video')
     launchDefaultMediaPlayer(client, content);
-  else if(content.content && content.content.includes('youtube'))
+  else if(content.type === 'youtube')
     launchYoutube(client, content);
   else if(content.type === 'web')
     launchWeb(client, content);

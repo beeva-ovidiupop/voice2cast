@@ -8,7 +8,8 @@ var Scraper = require ('images-scraper')
 
 google.resultsPerPage = 1;
 
-exports.search = function(query, querySource, callback){
+exports.search = function(query, querySource, callback) {
+  querySource = querySource.toLowerCase();
 	if(querySource === 'web' || querySource == 'google')
 		searchWeb(query, callback);
 	else if(_.indexOf(['image', 'images', 'picture', 'pictures', 'flickr'], querySource) >= 0){
@@ -33,7 +34,7 @@ function searchWeb(query, callback){
 	});
 }
 
-function searchImage(name,callback){
+function searchImage(name,callback) {
   console.log('Search image', name);
 	bing.list({
 	    keyword: 'name',
