@@ -26,6 +26,10 @@ exports.youtube = function(query, callback) {
   searchVideo(query, callback);
 };
 
+exports.web = function(query, callback) {
+  searchWeb(query, callback);
+};
+
 function searchWeb(query, callback){
   console.log('Search web', query);
 	google(query, function (err, res){

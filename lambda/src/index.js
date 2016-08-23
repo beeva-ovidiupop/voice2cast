@@ -114,7 +114,22 @@ HelloWorld.prototype.intentHandlers = {
               response.tell(choose(okayMessages));
           });
       });
-      },
+    },
+    "webIntent": function (intent, session, response) {
+      if(intent.slots.Search) var query = intent.slots.Search.value;
+      search.web(query, function(err, content){
+          console.log('search', err, content);
+          if(err) content = {'type': 'image', 'content': 'http://i.imgur.com/Ql6Dvqa.jpg' };
+          request.post({
+              url:'http://29e16bf3.ngrok.io/content',
+              json: content
+          },
+          function(error, resp, body){
+            var messages = [];
+              response.tell(choose(okayMessages));
+          });
+      });
+    },
     "AMAZON.HelpIntent": function (intent, session, response) {
         response.ask("You can say hello to me!", "You can say hello to me!");
     }
