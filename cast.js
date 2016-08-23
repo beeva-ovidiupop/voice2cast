@@ -62,12 +62,16 @@ function launchWeb(client, content){
 }
 
 function launchYoutube(client, content){
-  client.launch(Youtube, function(err, player) {
-    player.load(content.content);
-    player.on('status', function(status) {
-      console.log('status youtube', status);
-    });
+  content.content = 'https://www.youtube.com/embed/' + youtube_parser(content.content) + '?autoplay=1&controls=0&modestbranding=1&iv_load_policy=3';
+  client.launch(Web, function(err, manager) {
+    manager.load(content.content);
   });
+}
+
+function youtube_parser(url){
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    return (match&&match[7].length==11)? match[7] : false;
 }
 
 function launchDefaultMediaPlayer(client, content){
