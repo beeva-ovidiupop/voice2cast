@@ -9,7 +9,6 @@ exports.screens = function(req, res) {
 }
 
 exports.content = function(req, res) {
-    var content = req.body;
-    cast.setContent(content);
-    res.send({'message': 'Will try our best...'});
+    cast.setContent(req.body);
+    res.send({'message': 'Fuck yeah!'});
 }

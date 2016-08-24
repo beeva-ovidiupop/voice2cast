@@ -34,7 +34,16 @@ exports.findDevices = function(callback){
 }
 
 exports.setContent = function setContent(content){
-  curatedDevices.forEach(function(item){
+  var filteredDevices = [];
+  if(content.screen){
+    curatedDevices.forEach(function(item){
+      if(item.name.toLowerCase().indexOf(content.screen.toLowerCase()) > -1){
+        filteredDevices.push(item);
+      }
+    });
+  }
+  else filteredDevices = curatedDevices.slice(0);
+  filteredDevices.forEach(function(item){
     var client = new Client();
     client.connect(item.address, function() {
       launchPlayer(client, content);
