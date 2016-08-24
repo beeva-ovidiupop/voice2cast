@@ -10,4 +10,4 @@ app.use(bodyParser.json())
 app.get('/screens', controller.screens);
 app.post('/content', controller.content);
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
