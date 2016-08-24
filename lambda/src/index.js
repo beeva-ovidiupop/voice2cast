@@ -30,13 +30,18 @@ var AlexaSkill = require('./AlexaSkill');
 var request = require('request');
 var search = require('./search');
 
+var BASE_URL = 'https://c67cac8a2eae1d04f5928b5b1603a36ae49eafede475c07838e278610d7e0a.resindevice.io';
 var okayMessages = [
   "I will do my best",
   "I may try it",
   "Hey, you ask to much!",
   "I may show you something",
   "Okay Mr Policeman",
-  "Leave me alone"
+  "Leave me alone",
+  "Whatever",
+  "I am not your slave",
+  "Okay",
+  "Done anything else?"
 ];
 
 /**
@@ -76,7 +81,7 @@ HelloWorld.prototype.intentHandlers = {
     // register custom intent handlers
     "screenIntent": function (intent, session, response) {
         console.log(intent)
-        request.get('http://29e16bf3.ngrok.io/screens', function(error, resp, body) {
+        request.get(BASE_URL + '/screens', function(error, resp, body) {
             var screens = JSON.parse(body);
             if(screens.length < 1) response.tell("you don't tvs, you poor motherfucker");
             screens = screens.map(function(item){ return item.name });
@@ -92,7 +97,7 @@ HelloWorld.prototype.intentHandlers = {
             console.log('search', err, content);
             if(err) content = {'type': 'image', 'content': 'http://i.imgur.com/Ql6Dvqa.jpg' };
             request.post({
-                url:'http://29e16bf3.ngrok.io/content',
+                url: BASE_URL + '/content',
                 json: content
             },
             function(error, resp, body){
@@ -106,7 +111,7 @@ HelloWorld.prototype.intentHandlers = {
           console.log('search', err, content);
           if(err) content = {'type': 'image', 'content': 'http://i.imgur.com/Ql6Dvqa.jpg' };
           request.post({
-              url:'http://29e16bf3.ngrok.io/content',
+              url: BASE_URL + '/content',
               json: content
           },
           function(error, resp, body){
@@ -121,7 +126,7 @@ HelloWorld.prototype.intentHandlers = {
           console.log('search', err, content);
           if(err) content = {'type': 'image', 'content': 'http://i.imgur.com/Ql6Dvqa.jpg' };
           request.post({
-              url:'http://29e16bf3.ngrok.io/content',
+              url: BASE_URL + '/content',
               json: content
           },
           function(error, resp, body){
