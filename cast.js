@@ -22,7 +22,7 @@ browser.on('update', function (data) {
       devices[data.addresses[0]] = data;
       var newDevice = _.pick(data, ['host', 'port']);
       newDevice['address'] = data.addresses[0];
-      newDevice['name'] =  data['host'].substring(0, newDevice['host'].length - 6)
+      newDevice['name'] =  data['host'].replace('.local','');
       curatedDevices.push(newDevice);
     }
 });
