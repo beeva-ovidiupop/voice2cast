@@ -22,9 +22,10 @@ browser.on('update', function (data) {
       devices[data.addresses[0]] = data;
       var newDevice = _.pick(data, ['host', 'port']);
       newDevice['address'] = data.addresses[0];
-      if(data['host'])
+      if(data['host']){
         newDevice['name'] =  data['host'].replace('.local','');
-      curatedDevices.push(newDevice);
+        curatedDevices.push(newDevice);
+      }
     }
 });
 
