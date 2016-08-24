@@ -1,47 +1,47 @@
 'use strict';
 
 var _ = require('lodash');
-var mdns = require('mdns');
+var mdns = require('mdns-js');
 var Client                = require('castv2-client').Client;
 var Youtube               = require('castv2-youtube').Youtube;
 var Web                   = require('castv2-web').Web;
 var DefaultMediaReceiver  = require('castv2-client').DefaultMediaReceiver;
 
-var browser = mdns.createBrowser(mdns.tcp('googlecast'));
+var devices = {};
+var curatedDevices = [];
+
+var browser = mdns.createBrowser('_googlecast._tcp');
+
+browser.once('ready', function () {
+  console.log('ready');
+    browser.discover();
+});
+
+browser.on('update', function (data) {
+    if(!devices[data.addresses[0]] && data.type[0].name === 'googlecast'){
+      devices[data.addresses[0]] = data;
+      var newDevice = _.pick(data, ['host', 'port']);
+      newDevice['address'] = data.addresses[0];
+      newDevice['name'] =  data['host'].substring(0, newDevice['host'].length - 6)
+      curatedDevices.push(newDevice);
+    }
+});
 
 exports.findDevices = function(callback){
-  var devices = [];
-  browser.on('serviceUp', function(service) {
-    var newDevice = _.pick(service, ['name', 'host', 'port', 'addresses']);
-    newDevice['addresses'] = newDevice['addresses'][0];
-    devices.push(newDevice);
-  });
-  browser.start();
-
-  // 100 milisegundos de búsqueda
-  setTimeout(function() {
-    browser.stop();
-    // Hack?!
-    browser = mdns.createBrowser(mdns.tcp('googlecast'));
-    callback(_.uniq(devices));
-  }, 150);
+  callback(curatedDevices);
 }
 
 exports.setContent = function setContent(content){
-  browser.on('serviceUp', function(host) {
+  curatedDevices.forEach(function(item){
     var client = new Client();
-    client.connect(host, function() {
+    client.connect(item.address, function() {
       launchPlayer(client, content);
       client.on('error', function(err) {
         console.log('Error: %s', err.message);
         client.close();
       });
-    // ToDo esto no va aquí, mas abajo, al sur
-    browser.stop();
-    browser = mdns.createBrowser(mdns.tcp('googlecast'));
     });
   });
-  browser.start();
 }
 
 function launchPlayer(client, content){
