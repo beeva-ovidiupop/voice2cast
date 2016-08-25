@@ -1,0 +1,10 @@
+LIST_OF_SOURCES
+youtube
+google
+internet
+web
+image
+images
+picture
+pictures
+flickr
