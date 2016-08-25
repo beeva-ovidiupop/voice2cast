@@ -1,9 +1,19 @@
-sendContentIntent show me a {Source} of {puppies|Search}  
-sendContentIntent show me a {Source} from {puppies|Search}  
-sendContentIntent search a {Source} with {puppies|Search} 
-sendContentIntent search {Source} for {puppies|Search}  
-sendContentIntent search and show me {Source} of {puppies|Search}  
-sendContentIntent display the {Source} of {puppies|Search}   
+sendContentIntent show me a {puppies|Search} from {Source}
+sendContentIntent show me {puppies|Search} from {Source}
+sendContentIntent search a {puppies|Search} with {Source}
+sendContentIntent search {puppies|Search} in {Source}  
+sendContentIntent search and show me {puppies|Search} from {Source}
+sendContentIntent display {puppies|Search} at {Source}
+sendContentIntent display {puppies|Search} from {Source}
+sendContentIntent seek {puppies|Search} on {Source}
 screenIntent what screens are available
 screenIntent screens available
 screenIntent tell me available tvs
+playIntent play {puppies and pussycats|Search}
+playIntent display {puppies and pussycats|Search}
+playIntent play {nirvana|Search}
+playIntent display {nirvana|Search}
+webIntent search {nirvana|Search}
+webIntent search {puppies and pussycats|Search}
+webIntent google {nirvana|Search}
+webIntent google {puppies and pussycats|Search}
