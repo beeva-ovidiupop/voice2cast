@@ -62,7 +62,7 @@ function searchVideo(term, callback){
   console.log('Search youtube', term);
 	var opts = {
 	  maxResults: 10,
-	  key: 'AIzaSyBsp2PzLbU-3tJTUxGHfna9f8Xu608gGt0',
+	  key: 'YOUTUBE API KEY',
     type: 'video'
 	};
 	youtube(term, opts, function(err, results) {

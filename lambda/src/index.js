@@ -30,7 +30,7 @@ var AlexaSkill = require('./AlexaSkill');
 var request = require('request');
 var search = require('./search');
 
-var BASE_URL = 'https://c67cac8a2eae1d04f5928b5b1603a36ae49eafede475c07838e278610d7e0a.resindevice.io';
+var BASE_URL = 'RANDOM LOCAL SERVER URL';
 var okayMessages = [
   "I will do my best",
   "I may try it",
