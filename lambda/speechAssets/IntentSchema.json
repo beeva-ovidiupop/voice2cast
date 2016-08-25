@@ -4,6 +4,26 @@
       "intent": "screenIntent"
     },
     {
+      "intent": "playIntent",
+      "slots":
+      [
+      	{
+          "name": "Search",
+          "type": "AMAZON.LITERAL"
+        }
+      ]
+    },
+    {
+      "intent": "webIntent",
+      "slots":
+      [
+      	{
+          "name": "Search",
+          "type": "AMAZON.LITERAL"
+        }
+      ]
+    },
+    {
       "intent": "sendContentIntent",
       "slots": [
         {
@@ -21,4 +41,5 @@
     }
   ]
 }
+
 
