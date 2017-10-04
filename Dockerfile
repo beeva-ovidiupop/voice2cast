@@ -4,7 +4,7 @@ RUN sudo npm install -g pm2
 
 WORKDIR /usr/src/app
 COPY package.json package.json
-RUN JOBS=MAX npm install --production --unsafe-perm && npm cache clean && rm -rf /tmp/*
+RUN JOBS=MAX npm install --production --unsafe-perm && npm cache clean --force && rm -rf /tmp/*
 COPY . ./
 ENV INITSYSTEM on
 CMD ["npm", "start"]
